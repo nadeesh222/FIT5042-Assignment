@@ -8,6 +8,7 @@
     <class>hms.entities.ExternalUser</class>
     <class>hms.entities.Project</class>
     <class>hms.entities.ProjectDonations</class>
+    <class>hms.entities.Person</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>

@@ -26,7 +26,7 @@
     <body>
 
 
-
+ <h:form id="menu">
 
         <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Save Australian Heritage</a>
@@ -38,9 +38,8 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
 
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-envelope-o">
-                                Events
+                         <a class="nav-link" href="./faces/event_display.xhtml">     <i class="fa fa-envelope-o">
+                               Events
                             </i>
 
                         </a>
@@ -113,6 +112,14 @@
             </div>
         </nav> 
         
+        
+ </h:form> 
+        
+        
+        
+        
+        
+        
         <div class="container col-sm-4">
         </div>
         
@@ -173,13 +180,13 @@
                     </h:column>
                 </h:dataTable>
 
-                <h:commandButton id="add1" value="Add new" action="project_add.xhtml" class="btn btn-secondary" />
-
+                <h:commandButton id="add1" value="Add new" action="addProj" class="btn btn-secondary" />
+       <a href="project_search.xhtml" class="btn btn-secondary">Search Project</a>
+ 
             </h:form> 
 
 
         </div>
-
 
     </body>
 </html>

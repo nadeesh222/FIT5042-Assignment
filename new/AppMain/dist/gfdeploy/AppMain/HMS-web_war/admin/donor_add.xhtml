@@ -38,22 +38,21 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
 
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-envelope-o">
+                        <a class="nav-link" href="./faces/event_display.xhtml">
+                          <i class="fa fa-envelope-o">
                                 Events
                             </i>
 
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                   <li class="nav-item">
                        <a class="nav-link" href="./faces/project_display.xhtml">     <i class="fa fa-envelope-o">
                                 Projects
                             </i>
 
                         </a>
                     </li>
-
 
 
 
@@ -110,30 +109,18 @@
                 <h:form>
                     
                     <div class=" bg-info text-center">  
-                                    <h3 >Add Project</h3>
+                                    <h3 >Add donor</h3>
                     </div> <br/>
                   
-                    <table class="table table-bordered ">  
-                         <tr>
-                            <td width ="200">
-                                <h:outputLabel value="Name"  />
-                            </td>
-                            <td>
-                                <h:inputText id="pname" required="true" requiredMessage="Please enter project Name" value="#{projManage.name}" title="Name" >
-                                
-                                
-                                </h:inputText>
-                            </td>
-
-                        </tr>
+                    <table class="table table-bordered ">                   
                         <tr>
                             <td width ="200">
-                                <h:outputLabel value="description"  />
+                                <h:outputLabel value="name"  />
                             </td>
                             <td>
-                                <h:inputText id="dname" required="true" requiredMessage="Please enter project description" value="#{projManage.description}" title="Description" >
-                                
-                                
+                                <h:inputText id="dname"   requiredMessage="Please enter donor name" value="#{donManage.name}" title="Name" >
+                                <f:validateLength  minimum="3"  maximum="100"/>  
+                                <f:validateRequired />  
                                 </h:inputText>
                             </td>
 
@@ -141,27 +128,25 @@
 
                         <tr>
                             <td>
-                                <h:outputLabel value="budget" />
+                                <h:outputLabel value="streetAddress" />
                             </td>
                             <td>
-                                <h:inputText id="budget" value="#{projManage.budget}" required="true" requiredMessage="Please enter project budget" title="Budget" >
-                                 <f:convertNumber integerOnly="true" type="number" />
+                                <h:inputText id="address1" value="#{donManage.address}"   requiredMessage="Please enter donor address" title="address" >
+                                  <f:validateLength  minimum="5"  maximum="100"/>  
+                              <f:validateRequired />  
                                 </h:inputText>
                             </td>
 
                         </tr>
                         <tr>
                             <td>
-                                <h:outputLabel value="Donor"/>
+                                <h:outputLabel value="contact"/>
                             </td>
                             <td>
-                                <h:selectOneMenu id="contact" value="#{donorManagerBean.donor}" converter="convertDonor">
-                                
-                                <f:selectItems value="#{donorManagerBean.allDonors}" var="d"  
-                                               itemLabel="#{d.name}" itemValue="#{d}" />
-                            </h:selectOneMenu>        
-                                 
-                             
+                                <h:inputText required="true" id="contact1" requiredMessage="Please enter donor contact number" value="#{donManage.contactno}" title="contact" >
+                                   <f:convertNumber integerOnly="true" type="number" /> 
+                                 <f:validateRequired />  
+                                </h:inputText>
                             </td>
 
                         </tr>
@@ -169,9 +154,9 @@
                             <td></td>
                             <td>
                                    
-                                <h:commandButton id="submit"  value="Submit" action="#{projectManagerBean.addProject(projManage.name,projManage.description, projManage.budget, donorManagerBean.donor)}" class="btn btn-secondary" />
+                    <h:commandButton id="submit"  value="Submit" action="#{donorManagerBean.addDonor(donManage.name,donManage.address,donManage.contactno)}" class="btn btn-secondary" />
                      &nbsp;
-                    <h:commandButton id="close1" value="Close" action="faces/donor.xhtml" class="btn btn-secondary" />
+                    <h:commandButton id="close1" value="Close" action="faces/index.xhtml" class="btn btn-secondary" />
 
                                 
                             </td>

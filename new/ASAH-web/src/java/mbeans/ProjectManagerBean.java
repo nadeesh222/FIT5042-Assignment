@@ -10,6 +10,7 @@ import hms.entities.Project;
 import hms.interfaces.ProjectInt;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,21 +23,64 @@ import javax.faces.bean.ManagedBean;
  *
  * @author Nadeesh
  */
-
 @ManagedBean(name = "projectManagerBean")
 @SessionScoped
 public class ProjectManagerBean implements Serializable {
 
+    private Integer projid;
+    private String name;
+    private String description;
+    private Double budget;
+    private controllers.Donor donid;
     @EJB
     ProjectInt projectInt;
 
     private ArrayList<Project> projects;
 
     public ProjectManagerBean() {
-
     }
 
-    public void addProject(String name,String description, Double budget, Donor donid) {
+    public Integer getProjid() {
+        return projid;
+    }
+
+    public void setProjid(Integer projid) {
+        this.projid = projid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
+    public controllers.Donor getDonid() {
+        return donid;
+    }
+
+    public void setDonid(controllers.Donor donid) {
+        this.donid = donid;
+    }
+
+    public void addProject(String name, String description, Double budget, Donor donid) {
 
         try {
 
@@ -46,18 +90,71 @@ public class ProjectManagerBean implements Serializable {
             p.setBudget(budget);
             p.setDonid(donid);
             p.setStatus(1);
-          
+
             projectInt.addProject(p);
             setProjects(null);//to reload all projects fromm database
-            
-            
-            
+
         } catch (Exception ex) {
             Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-  
+    
+      public ArrayList<Project> searchProjectData(String pname, String dname) {
+        
+        try{
+
+            projects = new ArrayList<Project>();
+
+            List list = projectInt.searchProjectDetails(pname, dname);
+
+            if (list != null) {
+                
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i) != null) {
+                        Project p = (Project) list.get(i);
+                        // Project p=i.next();
+                        projects.add(p);
+
+                    } else {
+                        return null;
+                    }
+
+                }
+             
+        }
+            
+        }
+        catch(Exception ex){}
+        return projects;
+    }
+
+    public void searchProjectData1(String pname, String dname) {
+        
+        try{
+
+            projects = new ArrayList<Project>();
+
+            List list = projectInt.searchProjectDetails(pname, dname);
+
+            if (list != null) {
+                
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i) != null) {
+                        Project p = (Project) list.get(i);
+                        // Project p=i.next();
+                        projects.add(p);
+
+                    }  
+
+                }
+             
+        }
+            
+        }
+        catch(Exception ex){}
+         
+    }
 
     public ArrayList<Project> getProjects() {
         return projects;
@@ -127,7 +224,5 @@ public class ProjectManagerBean implements Serializable {
             d.setEditButtonOn(false);
         }
     }
-
-   
 
 }

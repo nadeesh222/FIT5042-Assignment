@@ -11,15 +11,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
- 
-
-import javax.inject.Named;
+import javax.faces.bean.*;
+import hms.entities.Donor;
 import hms.entities.Employee;
+import hms.interfaces.DonorInt;
 import hms.interfaces.EmployeeInt;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-
 
 /**
  * 
@@ -37,11 +35,19 @@ public class EmployeeManagerBean implements Serializable{
     EmployeeInt employeeInt;
 
       private ArrayList<Employee> employees;
-
+      private Employee employee;
     public EmployeeManagerBean() {
         
         employees=new ArrayList<Employee>();
 //        employees.add(new Employee(1, "ss", "sddd", 1, 212 , "ss  ", "ee", "rrr", 0));
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
   
@@ -54,9 +60,25 @@ public class EmployeeManagerBean implements Serializable{
         this.employees = employees;
     }
     
-    public List<Employee> getAllEmployees() {
+    public ArrayList<Employee> getAllEmployees() {
         try {
-            return employeeInt.getAllEmployees();
+              
+              List<Employee> l =  employeeInt.getAllEmployees();
+              
+          
+
+                employees = new ArrayList<Employee>();
+
+                if (l != null) {
+                    for (int i = 0; i < l.size(); i++) {
+                        Employee ee=(Employee)l.get(i);
+                        employees.add(ee);
+                    }
+
+                    return employees;
+                } else {
+                    return null;
+                }
         } catch (Exception ex) {
             Logger.getLogger(EmployeeManagerBean.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,15 +5,13 @@
  */
 package hms.ejb;
 
+import hms.entities.Employee;
+import hms.interfaces.EmployeeInt;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import hms.entities.Employee;
-import hms.interfaces.EmployeeInt;
-import javax.persistence.NamedQuery;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -49,13 +47,14 @@ public class EmployeeImpl implements EmployeeInt {
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employee>  getAllEmployees() {
         List<Employee> empList = null;
         try {
 
             //empList 
-             empList = entityManager.createNamedQuery("Employee.findAll").getResultList();
-
+         //    empList =  entityManager.createNamedQuery("Employee.findAll").getResultList();
+   Query query = entityManager.createQuery("SELECT a FROM Employee a");
+         empList=query.getResultList();
         } catch (Exception ex) {
             String y = "";
         }
