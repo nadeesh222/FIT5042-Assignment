@@ -26,7 +26,7 @@
     <body>
 
 
-
+ <h:form id="menu">
 
         <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Save Australian Heritage</a>
@@ -38,9 +38,8 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
 
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-envelope-o">
-                                Events
+                         <a class="nav-link" href="./faces/event_display.xhtml">     <i class="fa fa-envelope-o">
+                               Events
                             </i>
 
                         </a>
@@ -113,6 +112,14 @@
             </div>
         </nav> 
         
+        
+ </h:form> 
+        
+        
+        
+        
+        
+        
         <div class="container col-sm-4">
         </div>
         
@@ -135,51 +142,36 @@
  <h:column class="col-auto">
                         <f:facet name="header">Name</f:facet>
 
-                        <h:inputText value="#{d1.name}" size="20"  rendered="#{d1.editable}" />
-
+                      
                         <h:outputText value="#{d1.name}" rendered="#{not d1.editable}" />
                     </h:column>
                     <h:column class="col-auto">
                         <f:facet name="header">Description</f:facet>
 
-                        <h:inputText value="#{d1.description}" size="20"  rendered="#{d1.editable}" />
-
+                      
                         <h:outputText value="#{d1.description}" rendered="#{not d1.editable}" />
                     </h:column>
                     <h:column class="col-auto">
                         <f:facet name="header">Budget</f:facet>
 
-                        <h:inputText value="#{d1.budget}" size="20"  rendered="#{d1.editable}" />
-
+                  
                         <h:outputText value="#{d1.budget}" rendered="#{not d1.editable}" />
                     </h:column>
   <h:column class="col-auto">
                         <f:facet name="header">Donor</f:facet>
-                        <h:selectOneMenu rendered="#{d1.editable}" required="=true" requiredMessage="Please select donor" id="contact" value="#{d1.donid}" converter="convertDonor">
-                                 
-                                <f:selectItems value="#{donorManagerBean.allDonors}" var="d"  
-                                               itemLabel="#{d.name}" itemValue="#{d}" />
-                            </h:selectOneMenu>        
-                                 
-                        
+                              
                         <h:outputText value="#{d1.donid.name}" rendered="#{not d1.editable}" />
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandLink value="Edit" action="#{projectManagerBean.editAction(d1)}" rendered="#{d1.editButtonOn}" />&nbsp;
-                        <h:commandLink value="delete" action="#{projectManagerBean.deleteAction(d1)}" rendered="#{d1.editButtonOn}" />
-                        <h:commandLink value="update" action="#{projectManagerBean.updateAction(d1)}" rendered="#{d1.updateButtonOn}" />&nbsp;
-                        <h:commandLink value="cancel" action="#{projectManagerBean.cancelAction(d1)}" rendered="#{d1.updateButtonOn}" />
-                    </h:column>
+                
                 </h:dataTable>
 
-                <h:commandButton id="add1" value="Add new" action="project_add.xhtml" class="btn btn-secondary" />
-
+                <h:commandButton id="add1" value="Manage" action="proj_manage"  class="btn btn-secondary" />
+       <h:commandButton id="add2" value="Search Project" action="projsearch"  class="btn btn-secondary" />
+        
             </h:form> 
 
 
         </div>
-
 
     </body>
 </html>

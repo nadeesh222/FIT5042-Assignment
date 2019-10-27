@@ -6,15 +6,11 @@
 package hms.entities;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -29,24 +25,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Nadeesh
  */
 @Entity
-@Table(name = "employee")
-@DiscriminatorValue(value = "W")
-@PrimaryKeyJoinColumn(name="pid")
+@DiscriminatorValue(value = "E")
+
+@XmlRootElement
+ @NamedQueries({
+    @NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
+ })
 public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @NotNull
-    @Column(name = "RID")
-    private Integer rid;
-    @Column(name = "empno")
-    private Integer empno;
+  
     @Column(name = "ext")
     private Integer ext;
-    @Size(max = 20)
+    
     @Column(name = "role")
     private String role;
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid")
+    @JoinColumn(name = "eventidEmp", referencedColumnName = "eventid")
     @OneToOne
     private Event eventid;
     @JoinColumn(name = "projid", referencedColumnName = "projid")
@@ -57,21 +51,13 @@ public class Employee extends Person implements Serializable {
     }
 
     public Employee(Integer empno, Integer ext, String role, Event eventid, Project projid) {
-        this.empno = empno;
         this.ext = ext;
         this.role = role;
         this.eventid = eventid;
         this.projid = projid;
     }
 
-    public Integer getEmpno() {
-        return empno;
-    }
-
-    public void setEmpno(Integer empno) {
-        this.empno = empno;
-    }
-
+    
     public Integer getExt() {
         return ext;
     }

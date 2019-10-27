@@ -146,4 +146,8 @@ public Donor getDonorByDonId(int donid){
         }
     }
 
+    public String addUrl() {
+        return "admin/donor_add";
+    }
+
 }

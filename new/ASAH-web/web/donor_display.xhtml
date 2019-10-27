@@ -6,7 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet> 
-        <script src="resources/js/bootstrap.js" type="text/javascript"></script>
+         <h:outputScript library="scripts" name="resources/js/bootstrap.js">
+           
+         </h:outputScript>
         <style>
 
             .bs-example{
@@ -46,7 +48,7 @@
                         </a>
                     </li>
   <li class="nav-item">
-                       <a class="nav-link" href="./faces/project_display.xhtml">     <i class="fa fa-envelope-o">
+                       <a class="nav-link" href="faces/project_display.xhtml">     <i class="fa fa-envelope-o">
                                 Projects
                             </i>
 
@@ -57,7 +59,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./faces/donor_display.xhtml">
+                        <a class="nav-link" href="faces/donor_display.xhtml">
                             <i class="fa fa-envelope-o">
                                 Donors
                             </i>
@@ -117,7 +119,7 @@
         <div class="container col-sm-4">
             <div class="navbar navbar-inverse">
                 <div class=" bg-info text-center">  
-                                    <h3 >Manage Donor Information</h3>
+                                    <h3 >Display Donor Information</h3>
                     </div> <br/>
             </div>
         </div>
@@ -134,34 +136,24 @@
                     <h:column class="col-auto">
                         <f:facet name="header">Name</f:facet>
 
-                        <h:inputText value="#{d1.name}" size="20"  rendered="#{d1.editable}" />
-
+                    
                         <h:outputText value="#{d1.name}" rendered="#{not d1.editable}" />
                     </h:column>
                     <h:column class="col-auto">
                         <f:facet name="header">Address</f:facet>
 
-                        <h:inputText value="#{d1.address}" size="20"  rendered="#{d1.editable}" />
-
+                      
                         <h:outputText value="#{d1.address}" rendered="#{not d1.editable}" />
                     </h:column>
                     <h:column>
                         <f:facet name="header">Contact Number</f:facet>
 
-                        <h:inputText value="#{d1.contactno}" size="20"  rendered="#{d1.editable}" />
-
+                    
                         <h:outputText value="#{d1.contactno}" rendered="#{not d1.editable}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Action</f:facet>
-                        <h:commandLink value="Edit" action="#{donorManagerBean.editAction(d1)}" rendered="#{d1.editButtonOn}" />&nbsp;
-                        <h:commandLink value="delete" action="#{donorManagerBean.deleteAction(d1)}" rendered="#{d1.editButtonOn}" />
-                        <h:commandLink value="update" action="#{donorManagerBean.updateAction(d1)}" rendered="#{d1.updateButtonOn}" />&nbsp;
-                        <h:commandLink value="cancel" action="#{donorManagerBean.cancelAction(d1)}" rendered="#{d1.updateButtonOn}" />
                     </h:column>
                 </h:dataTable>
 
-                <h:commandButton id="add1" value="Add new" action="donor_add.xhtml" class="btn btn-secondary" />
+              <h:commandButton id="add1" value="Manage Donor" action="donManage" class="btn btn-secondary" />
 
             </h:form> 
 

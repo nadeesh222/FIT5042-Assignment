@@ -28,20 +28,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Nadeesh
  */
 @Entity
-@Table(name = "PERSON")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "Appuser")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="USERTYPE",discriminatorType = DiscriminatorType.STRING,length = 1)
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
-    , @NamedQuery(name = "Person.findByRid", query = "SELECT p FROM Person p WHERE p.rid = :rid")
-    , @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name")
-    , @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email")
-    , @NamedQuery(name = "Person.findByUsername", query = "SELECT p FROM Person p WHERE p.username = :username")
-    , @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password")
-    , @NamedQuery(name = "Person.findByStatus", query = "SELECT p FROM Person p WHERE p.status = :status")
-    , @NamedQuery(name = "Person.findByUsertype", query = "SELECT p FROM Person p WHERE p.usertype = :usertype")})
-public class Person implements Serializable {
+ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

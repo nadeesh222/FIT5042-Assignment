@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet> 
+        <script src="../resources/js/bootstrap.js" type="text/javascript"></script>
+        <style>
+
+            .bs-example{
+                margin: 20px;
+            }
+            .navbar{
+                margin-bottom: 1rem;
+            }
+
+        </style>
+    </h:head>
+
+
+
+
+
+    <body>
+
+
+
+
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Save Australian Heritage</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+
+                        <a class="nav-link" href="../event_display.xhtml">
+                          <i class="fa fa-envelope-o">
+                                Events
+                            </i>
+
+                        </a>
+                    </li>
+
+                   <li class="nav-item">
+                       <a class="nav-link" href="../project_display.xhtml">     <i class="fa fa-envelope-o">
+                                Projects
+                            </i>
+
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../donor_display.xhtml">
+                            <i class="fa fa-envelope-o">
+                                Donors
+                            </i>
+
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-envelope-o">
+                                Funds
+                            </i>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="test.xhtml">
+                            <i class="fa fa-envelope-o">
+                                Users
+                            </i>
+
+                        </a>
+                    </li>
+
+                </ul>
+                  </div>
+        </nav> 
+        
+        
+        
+        <div class="container col-sm-3">
+  </div>
+        
+        <div class="container col-sm-3">
+            <div class="navbar navbar-inverse">
+                <div class="navbar-brand">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container col-sm-3">
+
+
+            <f:view>
+                <h:form>
+                    
+                    <div class=" bg-info text-center">  
+                                    <h3 >Add donor</h3>
+                    </div> <br/>
+                  
+                    <table class="table table-bordered ">                   
+                        <tr>
+                            <td width ="200">
+                                <h:outputLabel value="name"  />
+                            </td>
+                            <td>
+                                <h:inputText id="dname"   requiredMessage="Please enter donor name" value="#{donManage.name}" title="Name" >
+                                <f:validateLength  minimum="3"  maximum="100"/>  
+                                <f:validateRequired />  
+                                </h:inputText>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <h:outputLabel value="streetAddress" />
+                            </td>
+                            <td>
+                                <h:inputText id="address1" value="#{donManage.address}"   requiredMessage="Please enter donor address" title="address" >
+                                  <f:validateLength  minimum="5"  maximum="100"/>  
+                              <f:validateRequired />  
+                                </h:inputText>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:outputLabel value="contact"/>
+                            </td>
+                            <td>
+                                <h:inputText required="true" id="contact1" requiredMessage="Please enter donor contact number" value="#{donManage.contactno}" title="contact" >
+                                   <f:convertNumber integerOnly="true" type="number" /> 
+                                 <f:validateRequired />  
+                                </h:inputText>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                   
+                    <h:commandButton id="submit"  value="Submit" action="#{donorManagerBean.addDonor(donManage.name,donManage.address,donManage.contactno)}" class="btn btn-secondary" />
+                     &nbsp;
+                    <h:commandButton id="close1" value="Close" action="faces/index.xhtml" class="btn btn-secondary" />
+
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h:messages class="alert alert-danger" />
+                                <h:messages globalOnly="true"/>  
+                            </td>
+                            
+                        </tr>
+                        
+                    </table>
+                 
+                </h:form>
+
+            </f:view>
+
+
+        </div>
+  <div class="container col-sm-3">
+  </div>
+
+
+    </body>
+</html>
+
+
