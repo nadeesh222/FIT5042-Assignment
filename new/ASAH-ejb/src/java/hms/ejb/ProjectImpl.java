@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -68,7 +69,22 @@ public class ProjectImpl implements ProjectInt {
         return donList;
 
     }
-
+    
+    
+    @Override
+public void searchProjectDetails(String qry){
+ Query query = entityManager.createNamedQuery("Project.searchproject");
+        query.setParameter("qry", qry);
+        
+         List s=query.getResultList();
+         String d="";
+        
+}
+        
+        
+        
+        
+        
     @Override
     public int findMaxProjectId() {
         int maxid = 0;

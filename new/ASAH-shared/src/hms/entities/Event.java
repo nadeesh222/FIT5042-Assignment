@@ -7,17 +7,19 @@ package hms.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,6 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "event")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(name = "Event.findmaxId", query = "SELECT max(e.eventid) FROM Event e where e.status=1 "),
+     @NamedQuery(name = "Event.findAllAsc", query = "SELECT e FROM Event e where e.status=1 order by e.eventid "),
+    @NamedQuery(name = "Event.findAllDesc", query = "SELECT e FROM Event e where e.status=1 order by e.eventid desc"),
+   
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e")
     , @NamedQuery(name = "Event.findByEventid", query = "SELECT e FROM Event e WHERE e.eventid = :eventid")
     , @NamedQuery(name = "Event.findByEventName", query = "SELECT e FROM Event e WHERE e.eventName = :eventName")
@@ -50,16 +56,69 @@ public class Event implements Serializable {
     @Size(max = 8000)
     @Column(name = "description")
     private String description;
-    @Size(max = 10)
-    @Column(name = "schedule_date")
-    private String scheduleDate;
-    @OneToMany(mappedBy = "eventid")
+     @Column(name = "SCHEDULE_DATE")
+    @Temporal(TemporalType.DATE)
+    private Date scheduleDate;
+   @OneToMany(mappedBy = "eventid")
     private Collection<ExternalUser> externalUserCollection;
     @OneToOne(mappedBy = "eventid")
     private Employee handledBy;
 
-    public Event() {
+      @Transient
+    boolean editable;
+    @Transient
+    private boolean updateButtonOn = false;
+    @Transient
+    private boolean editButtonOn = true;
+    @Column(name = "status")
+    private int status;
+
+    public int getStatus() {
+        return status;
     }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    //buttons
+    public boolean isUpdateButtonOn() {
+        return updateButtonOn;
+    }
+
+    public void setUpdateButtonOn(boolean updateButtonOn) {
+        this.updateButtonOn = updateButtonOn;
+    }
+
+    public boolean isEditButtonOn() {
+        return editButtonOn;
+    }
+
+    public void setEditButtonOn(boolean editButtonOn) {
+        this.editButtonOn = editButtonOn;
+    }
+
+   
+
+    public Event(Integer eventid, String eventName, String description, Date scheduleDate, Employee handledBy, boolean editable, int status) {
+        this.eventid = eventid;
+        this.eventName = eventName;
+        this.description = description;
+        this.scheduleDate = scheduleDate;
+        this.handledBy = handledBy;
+        this.editable = editable;
+        
+    }
+    
+    
 
     public Event(Integer eventid) {
         this.eventid = eventid;
@@ -89,13 +148,15 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public String getScheduleDate() {
+    public Date getScheduleDate() {
         return scheduleDate;
     }
 
-    public void setScheduleDate(String scheduleDate) {
+    public void setScheduleDate(Date scheduleDate) {
         this.scheduleDate = scheduleDate;
     }
+
+    
 
     @XmlTransient
     public Collection<ExternalUser> getExternalUserCollection() {
@@ -112,6 +173,9 @@ public class Event implements Serializable {
 
     public void setHandledBy(Employee handledBy) {
         this.handledBy = handledBy;
+    }
+
+    public Event() {
     }
 
    

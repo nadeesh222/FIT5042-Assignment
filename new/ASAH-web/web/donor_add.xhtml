@@ -38,8 +38,8 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
 
-                        <a class="nav-link" href="#">
-                            <i class="fa fa-envelope-o">
+                        <a class="nav-link" href="./faces/event_display.xhtml">
+                          <i class="fa fa-envelope-o">
                                 Events
                             </i>
 
@@ -118,9 +118,9 @@
                                 <h:outputLabel value="name"  />
                             </td>
                             <td>
-                                <h:inputText id="dname" required="true" requiredMessage="Please enter donor name" value="#{donManage.name}" title="Name" >
-                                
-                                
+                                <h:inputText id="dname"   requiredMessage="Please enter donor name" value="#{donManage.name}" title="Name" >
+                                <f:validateLength  minimum="3"  maximum="100"/>  
+                                <f:validateRequired />  
                                 </h:inputText>
                             </td>
 
@@ -131,8 +131,9 @@
                                 <h:outputLabel value="streetAddress" />
                             </td>
                             <td>
-                                <h:inputText id="address1" value="#{donManage.address}" required="true" requiredMessage="Please enter donor address" title="address" >
-                                 
+                                <h:inputText id="address1" value="#{donManage.address}"   requiredMessage="Please enter donor address" title="address" >
+                                  <f:validateLength  minimum="5"  maximum="100"/>  
+                              <f:validateRequired />  
                                 </h:inputText>
                             </td>
 
@@ -144,7 +145,7 @@
                             <td>
                                 <h:inputText required="true" id="contact1" requiredMessage="Please enter donor contact number" value="#{donManage.contactno}" title="contact" >
                                    <f:convertNumber integerOnly="true" type="number" /> 
-                                 
+                                 <f:validateRequired />  
                                 </h:inputText>
                             </td>
 

@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import hms.interfaces.DonorInt;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -63,28 +65,29 @@ public class DonorImpl implements DonorInt {
 
     @Override
     public List<Donor> getAllDonorsAsc() {
-        List<Donor> donList = null;
+        List<Donor> donList = new ArrayList<Donor>();
         try {
 
             //empList 
             CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-            CriteriaQuery query = builder.createQuery(Donor.class);
+            CriteriaQuery<Donor> query = builder.createQuery(Donor.class);
             Root<Donor> donor = query.from(Donor.class);
-            
-            query.select(donor);
-           
-            
-            query.select(builder.array(
-                    donor.get("donid"),
-                    donor.get("name"),
-                    donor.get("address"),
-                    donor.get("contactno")
-            )).where(builder.equal(donor.get("status").as(Integer.class), 1));
 
-
+            query.where(builder.equal(donor.get("status").as(Integer.class), 1));
+  
             TypedQuery<Donor> d1 = entityManager.createQuery(query);
-            //donList = (List<Donor>)entityManager.createQuery(query).getResultList();
-            donList = entityManager.createNamedQuery("Donor.findAllAsc").getResultList();
+            List<Donor> d = (List<Donor>) d1.getResultList();
+            Iterator iterator = d.iterator();
+            while (iterator.hasNext()) {
+
+                Object object = iterator.next();
+                
+                if (object != null) {
+                    Donor don=(Donor)object;
+                    donList.add(don);
+                }
+
+            }
 
         } catch (Exception ex) {
             String y = "";

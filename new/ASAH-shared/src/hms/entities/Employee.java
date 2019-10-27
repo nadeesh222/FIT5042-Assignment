@@ -6,15 +6,11 @@
 package hms.entities;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -32,6 +28,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "employee")
 @DiscriminatorValue(value = "W")
 @PrimaryKeyJoinColumn(name="pid")
+
+@XmlRootElement
+@NamedQueries({
+    
+    
+    
+//    @NamedQuery(name = "Employee.findAll", query = "SELECT e.name,e.email,e.empno,e.eventid,e.eventid,e.username,e.password" + " FROM Employee e,Person p where e.rid=p.rid order by e.rid")
+      @NamedQuery(name = "Employee.findByRid", query = "SELECT e FROM Employee e WHERE e.rid = :rid")
+    , @NamedQuery(name = "Employee.findByEmpno", query = "SELECT e FROM Employee e WHERE e.empno = :empno")
+    , @NamedQuery(name = "Employee.findByExt", query = "SELECT e FROM Employee e WHERE e.ext = :ext")
+    , @NamedQuery(name = "Employee.findByRole", query = "SELECT e FROM Employee e WHERE e.role = :role")})
 public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -42,7 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findAllDesc", query = "SELECT p FROM Project p where p.status=1 order by p.projid desc")
     ,
    
-    
+      @NamedQuery(name = "Project.searchproject", query = "SELECT p.NAME ,p.DESCRIPTION,d.NAME,p.BUDGET FROM HMSDB.DONOR d,HMSDB.PROJECT p where d.DONID=p.DONID and upper(p.name) like '%:qry%' and  upper(p.DESCRIPTION)like '%:qry%'")
+    ,
+   
     
    @NamedQuery(name = "Project.findByProjid", query = "SELECT p FROM Project p WHERE p.projid = :projid")
     , @NamedQuery(name = "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name")

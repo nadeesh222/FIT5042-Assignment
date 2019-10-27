@@ -18,11 +18,11 @@ import javax.inject.Named;
 public class Project implements Serializable {
 
     private Integer projid;
-  private String name;
-   private String description;
+    private String name;
+    private String description;
     private Double budget;
-	private Donor donid;
-
+    private Donor donid;
+    
     public Integer getProjid() {
         return projid;
     }
@@ -62,6 +62,5 @@ public class Project implements Serializable {
     public void setDonid(Donor donid) {
         this.donid = donid;
     }
-        
-        
+
 }
