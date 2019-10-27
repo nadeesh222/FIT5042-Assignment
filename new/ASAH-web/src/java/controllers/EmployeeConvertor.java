@@ -78,7 +78,7 @@ import mbeans.EmployeeManagerBean;
         if (value == null || value.equals("")) {
             return "";
         } else {
-            return String.valueOf(((hms.entities.Employee) value).getEmpno());
+            return String.valueOf(((hms.entities.Employee) value).getRid());
         }
     }
 }

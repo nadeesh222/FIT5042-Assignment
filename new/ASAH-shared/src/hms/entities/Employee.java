@@ -25,35 +25,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Nadeesh
  */
 @Entity
-@Table(name = "employee")
 @DiscriminatorValue(value = "W")
-@PrimaryKeyJoinColumn(name="pid")
 
 @XmlRootElement
-@NamedQueries({
-    
-    
-    
-//    @NamedQuery(name = "Employee.findAll", query = "SELECT e.name,e.email,e.empno,e.eventid,e.eventid,e.username,e.password" + " FROM Employee e,Person p where e.rid=p.rid order by e.rid")
-      @NamedQuery(name = "Employee.findByRid", query = "SELECT e FROM Employee e WHERE e.rid = :rid")
-    , @NamedQuery(name = "Employee.findByEmpno", query = "SELECT e FROM Employee e WHERE e.empno = :empno")
-    , @NamedQuery(name = "Employee.findByExt", query = "SELECT e FROM Employee e WHERE e.ext = :ext")
-    , @NamedQuery(name = "Employee.findByRole", query = "SELECT e FROM Employee e WHERE e.role = :role")})
+ @NamedQueries({
+    @NamedQuery(name = "Employee.findAll", query = "SELECT a FROM Employee a")
+ })
 public class Employee extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @NotNull
-    @Column(name = "RID")
-    private Integer rid;
-    @Column(name = "empno")
-    private Integer empno;
+  
     @Column(name = "ext")
     private Integer ext;
-    @Size(max = 20)
+    
     @Column(name = "role")
     private String role;
-    @JoinColumn(name = "eventid", referencedColumnName = "eventid")
+    @JoinColumn(name = "eventidEmp", referencedColumnName = "eventid")
     @OneToOne
     private Event eventid;
     @JoinColumn(name = "projid", referencedColumnName = "projid")
@@ -64,21 +51,13 @@ public class Employee extends Person implements Serializable {
     }
 
     public Employee(Integer empno, Integer ext, String role, Event eventid, Project projid) {
-        this.empno = empno;
         this.ext = ext;
         this.role = role;
         this.eventid = eventid;
         this.projid = projid;
     }
 
-    public Integer getEmpno() {
-        return empno;
-    }
-
-    public void setEmpno(Integer empno) {
-        this.empno = empno;
-    }
-
+    
     public Integer getExt() {
         return ext;
     }

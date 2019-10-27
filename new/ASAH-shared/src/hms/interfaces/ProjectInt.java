@@ -28,5 +28,5 @@ public interface ProjectInt {
     List<Project> getAllProjectsAsc();
 
     int findMaxProjectId();
-    void searchProjectDetails(String qry);
+    List searchProjectDetails(String pname,String dname);
 }

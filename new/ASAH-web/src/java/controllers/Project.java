@@ -22,6 +22,15 @@ public class Project implements Serializable {
     private String description;
     private Double budget;
     private Donor donid;
+    private String donName;
+
+    public void setDonName(String donName) {
+        this.donName = donName;
+    }
+
+    public String getDonName() {
+        return donName;
+    }
     
     public Integer getProjid() {
         return projid;

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -51,8 +52,9 @@ public class EmployeeImpl implements EmployeeInt {
         try {
 
             //empList 
-             empList =  entityManager.createNamedQuery("Employee.findAll").getResultList();
-
+         //    empList =  entityManager.createNamedQuery("Employee.findAll").getResultList();
+   Query query = entityManager.createQuery("SELECT a FROM Employee a");
+         empList=query.getResultList();
         } catch (Exception ex) {
             String y = "";
         }

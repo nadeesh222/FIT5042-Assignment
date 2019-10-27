@@ -10,6 +10,7 @@ import hms.entities.Employee;
 import hms.entities.Event;
 import hms.interfaces.EmployeeInt;
 import hms.interfaces.EventInt;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 /**
  *
@@ -67,28 +69,29 @@ public class EventManagerBean {
     }
 
     
- public void addEvent( String eventName, String description, Date scheduleDate, Employee handledBy) { 
+ public void addEvent( String eventName, String description, String  scheduleDate1, Employee handledBy) { 
 
-        try {
-
-            Event d = new Event();
-            
-            d.setEventName(eventName);
-            d.setDescription(description);
-            d.setScheduleDate(scheduleDate);
-            d.setHandledBy(handledBy);
-            
-            
-            
-            
-            setEvents(null);//to reload all events fromm database
-            
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event inserted successfully", null);
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//
+//            Event d = new Event();
+//            
+//             Date scheduleDate=new SimpleDateFormat("dd/MM/yyyy").parse(scheduleDate1);  
+//    
+//            d.setEventName(eventName);
+//            d.setDescription(description);
+//            d.setScheduleDate(scheduleDate);
+//            d.setHandledBy(handledBy);
+//            
+//            
+//            
+//            
+//            setEvents(null);//to reload all events fromm database
+//            
+//            
+//            
+//        } catch (Exception ex) {
+//            Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
   
